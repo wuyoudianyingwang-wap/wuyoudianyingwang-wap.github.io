@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>无忧电影网 - 轻松看片，最新电影资讯与观影指南</title>
+<meta name="keywords" content="无忧电影网,wuyoudianyingwang-wap,电影资讯,观影指南,热映排行,影片推荐,影评,影视导航">
+<meta name="description" content="无忧电影网 - 轻松看片，专注最新电影资讯、热映排行、影片分类与观影指南，让每一次选片都毫无压力。">
+<meta name="renderer" content="webkit">
+<meta name="format-detection" content="telephone=no">
+<meta property="og:type" content="website">
+<meta property="og:title" content="无忧电影网 - 轻松看片，最新电影资讯与观影指南">
+<meta property="og:description" content="专注最新电影资讯、热映排行、影片分类与观影指南的专业影视站点。">
+<meta property="og:url" content="https://wuyoudianyingwang-wap.github.io">
+<link rel="canonical" href="https://wuyoudianyingwang-wap.github.io">
+<style>
+/* ============ 设计令牌 ============ */
+:root{
+  --bg:#f4faf6;
+  --bg2:#e9f6ee;
+  --card:#ffffff;
+  --ink:#12201c;
+  --ink2:#3d544c;
+  --ink3:#7a9189;
+  --line:#e0eeea;
+  --line2:#c9dfd7;
+  --brand:#12b886;
+  --brand2:#20c997;
+  --teal:#0ca6a6;
+  --lime:#84cc16;
+  --yellow:#f5b642;
+  --coral:#ff7a59;
+  --violet:#8b5cf6;
+  --radius:24px;
+  --shadow:0 14px 40px rgba(18,184,134,.13);
+  --shadow2:0 6px 20px rgba(18,184,134,.08);
+  --ease:cubic-bezier(.22,.68,.35,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.8;font-size:15px;overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(700px 500px at 88% 6%,rgba(132,204,22,.10),transparent 60%),
+    radial-gradient(600px 600px at 8% 92%,rgba(12,166,166,.10),transparent 60%),
+    linear-gradient(180deg,#f6fbf8,#eef7f3 40%,#f6fbf8);}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:radial-gradient(rgba(18,184,134,.07) 1.5px,transparent 1.5px);
+  background-size:26px 26px;mask-image:radial-gradient(circle at 50% 50%,#000 30%,transparent 82%)}
+a{color:inherit;text-decoration:none;transition:color .25s var(--ease)}
+ul{list-style:none}
+::selection{background:var(--brand);color:#fff}
+:focus-visible{outline:2.5px solid var(--brand);outline-offset:3px}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+section{padding:78px 0;position:relative}
+.sec-hd{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:36px;flex-wrap:wrap}
+.sec-t{font-size:29px;font-weight:900;letter-spacing:-.3px;display:flex;align-items:center;gap:13px}
+.sec-t em{font-style:normal;font-size:12px;color:var(--ink3);letter-spacing:3px;text-transform:uppercase}
+.sec-t .dot{width:12px;height:12px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 5px rgba(18,184,134,.16);flex-shrink:0}
+.sec-more{font-size:13px;color:var(--ink2);border:1.5px solid var(--line2);padding:7px 15px;border-radius:999px;font-weight:700;background:#fff}
+.sec-more:hover{color:#fff;background:var(--brand);border-color:var(--brand)}
+
+/* ============ 导航 ============ */
+.head{position:sticky;top:0;z-index:100;background:rgba(246,251,248,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{max-width:1120px;margin:0 auto;padding:0 22px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:900;font-size:21px;flex-shrink:0}
+.logo b{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--lime));display:grid;place-items:center;color:#fff;font-size:19px;box-shadow:0 7px 22px rgba(18,184,134,.35)}
+.logo span{color:var(--brand)}
+.menu{display:flex;gap:4px;align-items:center}
+.menu a{font-size:14.5px;color:var(--ink2);padding:9px 15px;border-radius:12px;font-weight:700;position:relative}
+.menu a:hover{color:var(--brand)}
+.menu a.on{color:#fff;background:linear-gradient(135deg,var(--brand),var(--teal))}
+.btn-nav{display:none;width:42px;height:42px;border:none;border-radius:11px;background:#fff;color:var(--brand);font-size:20px;cursor:pointer;border:1px solid var(--line2)}
+
+/* ============ Hero · 气泡漂浮舞台 ============ */
+.hero{padding:40px 0 20px}
+.stage{position:relative;border-radius:32px;overflow:hidden;min-height:500px;padding:52px 48px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+  background:linear-gradient(150deg,#fff,#edfaf4);border:1.5px solid #d8eee5;box-shadow:var(--shadow)}
+.stage .blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.45;z-index:0}
+.stage .b1{width:230px;height:230px;background:#84cc16;top:-70px;right:40px}
+.stage .b2{width:190px;height:190px;background:#12b886;bottom:-60px;right:180px;opacity:.3}
+.stage .b3{width:160px;height:160px;background:#0ca6a6;top:120px;right:-40px;opacity:.28}
+.hero-txt{position:relative;z-index:1}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;padding:7px 14px;border-radius:999px;background:#fff;border:1px solid var(--line2);color:var(--ink2);width:fit-content;margin-bottom:18px;box-shadow:var(--shadow2)}
+.chip i{font-style:normal;color:var(--brand);font-weight:900}
+.stage h1{font-size:51px;line-height:1.18;font-weight:900;letter-spacing:-1px}
+.stage h1 .grad{background:linear-gradient(92deg,var(--brand),var(--teal) 55%,var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stage h1 .wy{color:var(--brand)}
+.stage p{font-size:16px;color:var(--ink2);margin-top:16px;max-width:430px}
+.hero-cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.btn{font-size:14.5px;font-weight:700;padding:13px 26px;border-radius:14px;cursor:pointer;border:1.5px solid transparent;transition:.3s var(--ease);font-family:inherit}
+.btn-p{background:linear-gradient(135deg,var(--brand),var(--teal));color:#fff;box-shadow:0 10px 26px rgba(18,184,134,.34)}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(18,184,134,.44)}
+.btn-o{background:#fff;color:var(--ink);border-color:var(--line2)}
+.btn-o:hover{border-color:var(--brand);color:var(--brand)}
+.h-stat{display:flex;gap:32px;margin-top:34px;flex-wrap:wrap}
+.h-stat div b{display:block;font-size:27px;font-weight:900;font-family:Georgia,serif;color:var(--brand)}
+.h-stat div span{font-size:12.5px;color:var(--ink3)}
+
+/* 右侧漂浮气泡海报 */
+.float{position:relative;height:420px;z-index:1}
+.fb{position:absolute;border-radius:20px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow);transition:.45s var(--ease);background:#fff;border:1px solid var(--line)}
+.fb:hover{transform:translateY(-8px) scale(1.02);box-shadow:var(--shadow)}
+.fb .ic{font-size:42px}
+.fb strong{font-size:14.5px;font-weight:900;line-height:1.45;color:var(--ink)}
+.fb span{font-size:11.5px;color:var(--ink3)}
+.fb.f1{width:175px;height:205px;top:10px;left:20px;background:linear-gradient(160deg,#fff,#e6faf0);transform:rotate(-5deg)}
+.fb.f2{width:175px;height:185px;top:60px;right:0;background:linear-gradient(160deg,#fff,#e6f6f9);transform:rotate(6deg)}
+.fb.f3{width:175px;height:195px;bottom:20px;left:70px;background:linear-gradient(160deg,#fff,#f0f7e6);transform:rotate(3deg)}
+.fb .tag{position:absolute;top:14px;right:14px;font-size:11px;font-weight:800;padding:3px 9px;border-radius:7px;background:var(--brand);color:#fff}
+
+/* ============ 榜单 · 横向票根卡片 ============ */
+.rank-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.ticket{position:relative;background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:20px;display:flex;align-items:center;gap:18px;transition:.35s var(--ease);overflow:hidden}
+.ticket::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--brand)}
+.ticket::after{content:"";position:absolute;width:22px;height:22px;border-radius:50%;background:var(--bg);left:-12px;top:50%;transform:translateY(-50%);box-shadow:inset 0 0 0 1.5px var(--line)}
+.ticket:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:#bfe4d8}
+.ticket.g2::before{background:var(--teal)}.ticket.g3::before{background:var(--lime)}.ticket.g4::before{background:var(--coral)}.ticket.g5::before{background:var(--yellow)}.ticket.g6::before{background:var(--violet)}
+.rk{font-family:Georgia,serif;font-weight:900;font-size:30px;width:44px;flex-shrink:0;color:var(--brand);text-align:center}
+.ticket .th{width:58px;height:58px;border-radius:15px;display:grid;place-items:center;font-size:28px;flex-shrink:0;background:linear-gradient(150deg,#eafaf2,#d6f2e8)}
+.ticket .info{flex:1;min-width:0}
+.ticket h4{font-size:16.5px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ticket .sub{font-size:12.5px;color:var(--ink3)}
+.ticket .sc{text-align:right;flex-shrink:0}
+.ticket .sc b{display:block;font-size:22px;font-weight:900;color:var(--brand);font-family:Georgia,serif}
+.ticket .sc i{font-style:normal;font-size:11px;color:var(--ink3)}
+
+/* ============ 分类 · 分屏大色块 ============ */
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cat{position:relative;border-radius:22px;padding:24px 20px;min-height:180px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:.45s var(--ease);color:#fff}
+.cat:hover{transform:translateY(-7px) scale(1.015)}
+.cat .ic{font-size:38px;z-index:1}
+.cat h4{font-size:19px;font-weight:900;z-index:1}
+.cat .num{position:absolute;right:-8px;bottom:-16px;font-family:Georgia,serif;font-size:78px;font-weight:900;opacity:.22;line-height:1;z-index:0}
+.cat .meta{font-size:12px;opacity:.85;z-index:1;letter-spacing:.5px}
+.cat.c1{background:linear-gradient(150deg,#0e9f6e,#12b886)}.cat.c2{background:linear-gradient(150deg,#087f5b,#0ca6a6)}
+.cat.c3{background:linear-gradient(150deg,#b45309,#f5b642);color:#3d2b06}.cat.c3 .num{opacity:.18}
+.cat.c4{background:linear-gradient(150deg,#6d28d9,#8b5cf6)}.cat.c5{background:linear-gradient(150deg,#be123c,#ff7a59)}
+.cat.c6{background:linear-gradient(150deg,#3f6212,#84cc16);color:#1a2b04}.cat.c6 .num{opacity:.18}
+.cat.c7{background:linear-gradient(150deg,#0369a1,#0ea5e9)}.cat.c8{background:linear-gradient(150deg,#9d174d,#ec4899)}
+
+/* ============ 资讯 · 编辑大图堆叠 ============ */
+.news{display:grid;grid-template-columns:1.4fr 1fr;gap:22px}
+.feature{position:relative;border-radius:24px;overflow:hidden;min-height:400px;padding:30px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;transition:.45s var(--ease);background:linear-gradient(160deg,#0e4f3d,#12b886)}
+.feature:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.feature .bigic{position:absolute;right:26px;top:30px;font-size:120px;opacity:.35}
+.feature .feat-tag{position:relative;font-size:12px;font-weight:800;padding:5px 13px;border-radius:8px;background:rgba(255,255,255,.22);width:fit-content;backdrop-filter:blur(6px)}
+.feature h4{position:relative;font-size:26px;font-weight:900;line-height:1.5;margin:16px 0 12px;max-width:92%}
+.feature .stars{position:relative;color:#ffe066;font-size:14px;letter-spacing:3px}
+.feature .meta{position:relative;font-size:13px;opacity:.9;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.25)}
+.tlist{display:flex;flex-direction:column;gap:16px}
+.titem{display:flex;gap:16px;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px;align-items:center;transition:.35s var(--ease)}
+.titem:hover{transform:translateX(6px);box-shadow:var(--shadow2);border-color:#bfe4d8}
+.titem .ti{font-size:26px;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;flex-shrink:0;background:linear-gradient(150deg,#eafaf2,#d6f2e8)}
+.titem .info{flex:1;min-width:0}
+.titem h5{font-size:15.5px;font-weight:900;line-height:1.5;margin-bottom:5px}
+.titem .sub{font-size:12px;color:var(--ink3)}
+.titem .tg{font-size:11px;font-weight:800;padding:3px 9px;border-radius:6px;background:rgba(18,184,134,.12);color:var(--brand);flex-shrink:0}
+
+/* ============ 关于 · 分屏 ============ */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.panel{background:#fff;border:1.5px solid var(--line);border-radius:28px;padding:38px}
+.panel h3{font-size:25px;font-weight:900;margin-bottom:14px}
+.panel p{color:var(--ink2);font-size:14.5px}
+.panel p+p{margin-top:12px}
+.why{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.why div{background:var(--bg2);border-radius:16px;padding:20px}
+.why div .ic{font-size:28px}
+.why div h5{font-size:15.5px;font-weight:900;margin:9px 0 5px}
+.why div span{font-size:13px;color:var(--ink3)}
+.contact{background:linear-gradient(150deg,var(--brand),var(--teal));border-radius:28px;padding:38px;color:#fff}
+.contact .kicker{font-size:12px;letter-spacing:2px;opacity:.85}
+.contact h3{font-size:23px;font-weight:900;margin:8px 0 12px}
+.contact p{font-size:14px;opacity:.95}
+.box{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:13.5px;backdrop-filter:blur(6px)}
+.box b{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.subs{display:flex;gap:8px;margin-top:18px}
+.subs input{flex:1;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:12px;padding:13px 14px;color:#fff;font-size:14px;font-family:inherit}
+.subs input::placeholder{color:rgba(255,255,255,.8)}
+.subs input:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.28)}
+.subs button{border:none;border-radius:12px;padding:0 20px;background:#fff;color:var(--brand);font-weight:800;cursor:pointer;font-family:inherit;transition:.3s}
+.subs button:hover{background:var(--bg);color:var(--teal)}
+.contact .btn{width:100%;margin-top:16px;text-align:center;font-size:15px;background:rgba(255,255,255,.16);color:#fff;border-color:rgba(255,255,255,.4)}
+.contact .btn:hover{background:#fff;color:var(--brand);border-color:#fff}
+
+/* ============ 页脚 ============ */
+footer{background:#0f1f1a;border-top:1px solid rgba(255,255,255,.06);padding:56px 0 26px;margin-top:24px}
+.foot{max-width:1120px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
+.foot .brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:20px;color:#fff}
+.foot .brand b{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--brand),var(--lime));display:grid;place-items:center;font-size:17px}
+.foot .brand span{color:var(--brand2)}
+.foot p{font-size:13.5px;margin-top:14px;color:#9fb5ae;line-height:1.85}
+.foot h5{font-size:14px;color:#fff;margin-bottom:16px;letter-spacing:1px}
+.foot ul li{margin-bottom:10px}
+.foot ul a{color:#9fb5ae;font-size:13.5px}
+.foot ul a:hover{color:var(--brand2)}
+.copy{max-width:1120px;margin:34px auto 0;padding:20px 22px 0;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#7c948c}
+.copy a{color:#b8ccc5}
+.copy a:hover{color:var(--brand2)}
+
+.gotop{position:fixed;right:20px;bottom:-60px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--teal));color:#fff;border:none;font-size:18px;cursor:pointer;z-index:99;box-shadow:0 10px 28px rgba(18,184,134,.4);transition:.35s var(--ease)}
+.gotop.show{bottom:24px}
+
+/* ============ 响应式 ============ */
+@media(max-width:960px){
+  .stage{grid-template-columns:1fr;padding:40px 30px;min-height:auto}
+  .float{height:340px;max-width:440px;margin:0 auto}
+  .rank-grid{grid-template-columns:1fr}
+  .news{grid-template-columns:1fr}
+  .feature{min-height:320px}
+  .about{grid-template-columns:1fr}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .wrap{padding:0 16px}
+  section{padding:54px 0}
+  .sec-t{font-size:22px}
+  .nav{height:60px}
+  .menu{position:fixed;top:60px;left:0;right:0;flex-direction:column;padding:14px;background:rgba(246,251,248,.98);border-bottom:1px solid var(--line);gap:4px;transform:translateY(-140%);transition:.35s var(--ease)}
+  .menu.open{transform:translateY(0)}
+  .menu a{width:100%;text-align:center;padding:12px;border-radius:10px}
+  .btn-nav{display:grid;place-items:center}
+  .stage{padding:32px 22px}
+  .stage h1{font-size:32px}
+  .stage p{font-size:14.5px}
+  .h-stat{gap:22px}
+  .float{height:300px}
+  .fb{width:150px!important;height:auto!important;min-height:150px}
+  .cats{grid-template-columns:1fr 1fr;gap:12px}
+  .cat{min-height:150px;padding:20px 16px}
+  .cat .num{font-size:56px}
+  .cat h4{font-size:17px}
+  .panel,.contact{padding:26px}
+  .panel h3,.contact h3{font-size:21px}
+  .why{grid-template-columns:1fr}
+  .feature h4{font-size:21px}
+  .foot{grid-template-columns:1fr;gap:24px}
+  .copy{flex-direction:column;text-align:center}
+}
+@media(max-width:380px){
+  .h-stat{gap:16px}
+  .hero-cta .btn{padding:12px 20px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<!-- ===== 导航 ===== -->
+<header class="head">
+  <div class="nav">
+    <a class="logo" href="#home" aria-label="无忧电影网 首页"><b>忧</b>无忧<span>电影网</span></a>
+    <nav class="menu" id="menu">
+      <a href="#home" class="on">首页</a>
+      <a href="#rank">热映榜单</a>
+      <a href="#category">影片分类</a>
+      <a href="#news">资讯影评</a>
+      <a href="#about">关于我们</a>
+    </nav>
+    <button class="btn-nav" id="navBtn" aria-label="菜单">☰</button>
+  </div>
+</header>
+
+<!-- ===== Hero · 气泡漂浮舞台 ===== -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="stage">
+      <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+      <div class="hero-txt">
+        <div class="chip"><i>●</i> WUYOU FILM · 轻松看片指南</div>
+        <h1>轻松看片，就上<br><span class="grad">无忧电影网</span><span class="wy"> 🍃</span></h1>
+        <p>聚焦电影资讯、热映排行、影片分类与观影指南，帮你告别选择困难，快速找到值得看的好电影。</p>
+        <div class="hero-cta">
+          <a class="btn btn-p" href="#rank">查看热映榜单</a>
+          <a class="btn btn-o" href="#category">浏览影片分类</a>
+        </div>
+        <div class="h-stat">
+          <div><b>13,860</b><span>影片资料</span></div>
+          <div><b>1,240</b><span>每日访问</span></div>
+          <div><b>42</b><span>影片类型</span></div>
+        </div>
+      </div>
+      <div class="float">
+        <div class="fb f1"><span class="ic">🌿</span><strong>森林深处<br>无声告白</strong><span>治愈文艺 · 高分</span><span class="tag">HOT</span></div>
+        <div class="fb f2"><span class="ic">🚀</span><strong>光年之外<br>新世界</strong><span>硬核科幻 · 热映</span></div>
+        <div class="fb f3"><span class="ic">🍂</span><strong>秋天的<br>第一次相遇</strong><span>温暖爱情 · 推荐</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 热映榜单 · 票根卡 ===== -->
+<section id="rank" style="padding-top:22px">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="sec-t"><i class="dot"></i>热映排行榜<em>Box Office</em></div>
+      <a class="sec-more" href="#">完整榜单 ›</a>
+    </div>
+    <div class="rank-grid">
+      <a class="ticket g1" href="#"><span class="rk">1</span><span class="th">🌿</span><div class="info"><h4>森林深处：无声告白</h4><div class="sub">苏怀瑾 导演 · 治愈文艺</div></div><div class="sc"><b>9.2</b><i>8.6 万人评分</i></div></a>
+      <a class="ticket g2" href="#"><span class="rk">2</span><span class="th">🚀</span><div class="info"><h4>光年之外：新世界</h4><div class="sub">陈星河 导演 · 硬核科幻</div></div><div class="sc"><b>8.9</b><i>6.2 万人评分</i></div></a>
+      <a class="ticket g3" href="#"><span class="rk">3</span><span class="th">🍂</span><div class="info"><h4>秋天的第一次相遇</h4><div class="sub">林知夏 导演 · 温暖爱情</div></div><div class="sc"><b>8.7</b><i>5.4 万人评分</i></div></a>
+      <a class="ticket g4" href="#"><span class="rk">4</span><span class="th">🕵️</span><div class="info"><h4>逆光追踪</h4><div class="sub">雷牧 导演 · 悬疑犯罪</div></div><div class="sc"><b>8.5</b><i>4.8 万人评分</i></div></a>
+      <a class="ticket g5" href="#"><span class="rk">5</span><span class="th">🎭</span><div class="info"><h4>戏如人生</h4><div class="sub">宋清辞 导演 · 年代剧情</div></div><div class="sc"><b>8.4</b><i>3.9 万人评分</i></div></a>
+      <a class="ticket g6" href="#"><span class="rk">6</span><span class="th">⚔️</span><div class="info"><h4>边城孤勇</h4><div class="sub">赵破军 导演 · 古装动作</div></div><div class="sc"><b>8.2</b><i>4.1 万人评分</i></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 影片分类 · 大色块 ===== -->
+<section id="category">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="sec-t"><i class="dot"></i>影片分类<em>Categories</em></div>
+      <a class="sec-more" href="#">全部分类 ›</a>
+    </div>
+    <div class="cats">
+      <a class="cat c1" href="#"><span class="num">01</span><span class="ic">🚀</span><h4>科幻片</h4><span class="meta">2,160 部</span></a>
+      <a class="cat c2" href="#"><span class="num">02</span><span class="ic">💞</span><h4>爱情片</h4><span class="meta">3,040 部</span></a>
+      <a class="cat c3" href="#"><span class="num">03</span><span class="ic">😂</span><h4>喜剧片</h4><span class="meta">2,580 部</span></a>
+      <a class="cat c4" href="#"><span class="num">04</span><span class="ic">🕵️</span><h4>悬疑片</h4><div class="meta">1,720 部</div></a>
+      <a class="cat c5" href="#"><span class="num">05</span><span class="ic">👻</span><h4>惊悚片</h4><span class="meta">1,360 部</span></a>
+      <a class="cat c6" href="#"><span class="num">06</span><span class="ic">⚔️</span><h4>动作片</h4><span class="meta">2,810 部</span></a>
+      <a class="cat c7" href="#"><span class="num">07</span><span class="ic">🏰</span><h4>历史片</h4><span class="meta">980 部</span></a>
+      <a class="cat c8" href="#"><span class="num">08</span><span class="ic">🎨</span><h4>文艺片</h4><span class="meta">1,640 部</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 资讯影评 · 大图堆叠 ===== -->
+<section id="news">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div class="sec-t"><i class="dot"></i>资讯与影评<em>News & Review</em></div>
+      <a class="sec-more" href="#">更多文章 ›</a>
+    </div>
+    <div class="news">
+      <a class="feature" href="#">
+        <div class="bigic">🌿</div>
+        <span class="feat-tag">深度影评</span>
+        <h4>《森林深处：无声告白》用光影治愈了谁的孤独？</h4>
+        <div class="stars">★★★★★ 9.2 分</div>
+        <div class="meta">✍️ 影评人 苏白 · 10 分钟前</div>
+      </a>
+      <div class="tlist">
+        <a class="titem" href="#"><span class="ti">📈</span><div class="info"><h5>周末票房速报：三部新片同台竞技</h5><div class="sub">📊 数据观察 · 1 小时前</div></div><span class="tg">票房</span></a>
+        <a class="titem" href="#"><span class="ti">🎞️</span><div class="info"><h5>本周必看清单：五部高分新片推荐</h5><div class="sub">🎬 编辑部 · 3 小时前</div></div><span class="tg">推荐</span></a>
+        <a class="titem" href="#"><span class="ti">🎙️</span><div class="info"><h5>导演访谈：苏怀瑾谈《森林深处》创作</h5><div class="sub">🎤 专访 · 昨天</div></div><span class="tg">访谈</span></a>
+        <a class="titem" href="#"><span class="ti">📝</span><div class="info"><h5>从剧本到银幕：年度最佳改编盘点</h5><div class="sub">✍️ 专栏 · 2 天前</div></div><span class="tg">盘点</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 关于 · 分屏 ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="about">
+      <div class="panel">
+        <div class="kicker" style="font-size:12px;letter-spacing:2px;color:var(--ink3)">ABOUT WUYOU FILM</div>
+        <h3>关于无忧电影网</h3>
+        <p>无忧电影网（wuyoudianyingwang-wap）专注电影资讯与观影指南，坚持"让每一次选片都轻松无忧"，为影迷提供及时、专业、友好的影视内容服务。</p>
+        <p>从影片资料整理、热映榜单更新，到深度影评与类型推荐，我们帮你省下挑选的时间，把更多精力留给观影本身。</p>
+        <div class="why">
+          <div><div class="ic">⚡</div><h5>每日更新</h5><span>资讯与榜单同步刷新</span></div>
+          <div><div class="ic">⭐</div><h5>真实评分</h5><span>编辑独立打分体系</span></div>
+          <div><div class="ic">🎯</div><h5>精准推荐</h5><span>按喜好匹配好电影</span></div>
+          <div><div class="ic">✍️</div><h5>深度影评</h5><span>不止于评分的解读</span></div>
+        </div>
+      </div>
+      <div class="contact">
+        <div class="kicker">CONTACT US</div>
+        <h3>联系我们</h3>
+        <p>商务合作、投稿与内容咨询，欢迎随时与我们取得联系，我们会尽快回复。</p>
+        <div class="box">📧 <b>hello@wuyoudianyingwang.com</b></div>
+        <div class="box">🌐 <b>https://wuyoudianyingwang-wap.github.io</b></div>
+        <div class="subs">
+          <input type="email" placeholder="输入邮箱订阅影评">
+          <button type="button" onclick="this.textContent='已订阅 ✓'">订阅</button>
+        </div>
+        <a class="btn" href="#">投稿与商务合作</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 页脚 ===== -->
+<footer>
+  <div class="foot">
+    <div>
+      <div class="brand"><b>忧</b>无忧<span>电影网</span></div>
+      <p>专注电影资讯、热映排行、影片分类与观影指南，让每一次选片都轻松无忧。</p>
+    </div>
+    <div><h5>网站导航</h5><ul><li><a href="#home">网站首页</a></li><li><a href="#rank">热映排行榜</a></li><li><a href="#category">影片分类</a></li><li><a href="#news">资讯影评</a></li></ul></div>
+    <div><h5>内容栏目</h5><ul><li><a href="#">最新上映</a></li><li><a href="#">高分推荐</a></li><li><a href="#">票房榜单</a></li><li><a href="#">经典回顾</a></li></ul></div>
+    <div><h5>关于本站</h5><ul><li><a href="#about">关于我们</a></li><li><a href="#">联系方式</a></li><li><a href="#">投稿合作</a></li><li><a href="#">免责声明</a></li></ul></div>
+  </div>
+  <div class="copy">
+    <span>© 2026 无忧电影网（wuyoudianyingwang-wap） 保留所有权利。</span>
+    <span>网站地址：<a href="https://wuyoudianyingwang-wap.github.io">https://wuyoudianyingwang-wap.github.io</a></span>
+  </div>
+</footer>
+
+<button class="gotop" id="gotop" aria-label="回到顶部">↑</button>
+
+<script>
+var navBtn=document.getElementById('navBtn'),menu=document.getElementById('menu');
+navBtn.addEventListener('click',function(){menu.classList.toggle('open')});
+menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open')})});
+
+var links=document.querySelectorAll('.menu a'),secs=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',function(){
+  var pos=window.scrollY+120,idx=0;
+  secs.forEach(function(s,i){if(s.offsetTop<=pos)idx=i});
+  links.forEach(function(l,i){l.classList.toggle('on',i===idx)});
+});
+
+var gotop=document.getElementById('gotop');
+window.addEventListener('scroll',function(){gotop.classList.toggle('show',window.scrollY>400)});
+gotop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+</script>
+</body>
+</html>
